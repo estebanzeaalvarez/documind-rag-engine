@@ -10,10 +10,14 @@ app = FastAPI()
 
 # 2. Configuración de la IA
 API_KEY = os.environ.get("GOOGLE_API_KEY", "AIzaSyCxecEPsKKoLi775K9StShWVCanwMPweQY")
-genai.configure(api_key=API_KEY)
 
-# Intentamos la carga del modelo sin prefijos para que la SDK decida la mejor ruta
-model = genai.GenerativeModel('gemini-1.5-flash')
+# Forzamos el transporte a 'rest' y la versión a 'v1' para evitar el error 404 de la v1beta
+genai.configure(api_key=API_KEY, transport='rest')
+
+# Instanciamos el modelo asegurándonos de que use la ruta de producción
+model = genai.GenerativeModel(
+    model_name='gemini-1.5-flash',
+)
 
 # Interfaz "Developer/Engineer Mode" mejorada con Prompt Editor
 html_content = """
