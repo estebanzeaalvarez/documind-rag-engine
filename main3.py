@@ -317,10 +317,8 @@ async def analyze_document(file: UploadFile = File(...), custom_prompt: str = Fo
         {texto_cv[:8000]}
         """
         
-        response = client.models.generate_content(
-            model='gemini-1.5-flash',  # Cambiado de 2.5 a 1.5
-            contents=full_prompt,
-        )
+# Usamos el objeto 'model' definido arriba con la sintaxis correcta
+        response = model.generate_content(full_prompt)
         
         return {
             "archivo": file.filename,
