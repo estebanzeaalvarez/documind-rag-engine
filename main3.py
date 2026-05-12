@@ -5,8 +5,6 @@ import fitz  # PyMuPDF
 import google.generativeai as genai
 import time
 import os
-from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
 # 1. Inicializar la aplicación FastAPI
@@ -14,10 +12,12 @@ app = FastAPI()
 
 # 2. Configuración de la IA
 API_KEY = os.environ.get("GOOGLE_API_KEY", "AIzaSyCxecEPsKKoLi775K9StShWVCanwMPweQY")
-genai.configure(api_key=API_KEY)
 
-# Usamos la versión específica para evitar el error 404 en ciertas regiones de despliegue
-model = genai.GenerativeModel(model_name='models/gemini-1.5-flash')
+# Forzamos el uso de la versión v1beta que es la más compatible con 1.5 Flash en entornos cloud
+os.environ["GOOGLE_API_USE_V1BETA"] = "1" 
+
+genai.configure(api_key=API_KEY)
+model = genai.GenerativeModel('gemini-1.5-flash')
 
 # Interfaz "Developer/Engineer Mode" mejorada con Prompt Editor
 html_content = """
