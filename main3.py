@@ -311,7 +311,7 @@ async def analyze_document(file: UploadFile = File(...), custom_prompt: str = Fo
         """
         
         response = client.models.generate_content(
-            model='gemini-2.5-flash',
+            model='gemini-1.5-flash',  # Cambiado de 2.5 a 1.5
             contents=full_prompt,
         )
         
