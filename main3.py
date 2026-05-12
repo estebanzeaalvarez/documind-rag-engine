@@ -4,9 +4,11 @@ import uvicorn
 import fitz  # PyMuPDF
 from google import genai 
 import time
+import os
 
-# Configuración de la IA
-client = genai.Client(api_key="AIzaSyCxecEPsKKoLi775K9StShWVCanwMPweQY")
+# Configuración de la IA - Prioriza Variable de Entorno para Render
+API_KEY = os.environ.get("GOOGLE_API_KEY", "AIzaSyCxecEPsKKoLi775K9StShWVCanwMPweQY")
+client = genai.Client(api_key=API_KEY)
 
 app = FastAPI(title="DocuMind RAG Engine")
 
