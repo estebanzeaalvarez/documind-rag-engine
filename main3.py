@@ -12,8 +12,8 @@ app = FastAPI()
 API_KEY = os.environ.get("GOOGLE_API_KEY", "AIzaSyCxecEPsKKoLi775K9StShWVCanwMPweQY")
 genai.configure(api_key=API_KEY)
 
-# Usamos 'gemini-1.5-flash-latest' para forzar la conexión en entornos cloud
-model = genai.GenerativeModel('gemini-1.5-flash-latest')
+# Intentamos la carga del modelo sin prefijos para que la SDK decida la mejor ruta
+model = genai.GenerativeModel('gemini-1.5-flash')
 
 # Interfaz "Developer/Engineer Mode" mejorada con Prompt Editor
 html_content = """
