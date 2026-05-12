@@ -5,11 +5,16 @@ import fitz  # PyMuPDF
 import google.generativeai as genai
 import time
 import os
+from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 
-# Configuración de la IA - Prioriza Variable de Entorno para Render
+# 1. Inicializar la aplicación FastAPI
+app = FastAPI()
+
+# 2. Configuración de la IA
 API_KEY = os.environ.get("GOOGLE_API_KEY", "AIzaSyCxecEPsKKoLi775K9StShWVCanwMPweQY")
 genai.configure(api_key=API_KEY)
-# Usamos el modelo que mencionaste en tu commit anterior
 model = genai.GenerativeModel('gemini-1.5-flash')
 
 # Interfaz "Developer/Engineer Mode" mejorada con Prompt Editor
