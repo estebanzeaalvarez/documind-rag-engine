@@ -4,9 +4,11 @@ import uvicorn
 import fitz 
 import google.generativeai as genai
 import time
+import os
 
-# 1. Configuración de la IA (Usando la librería correcta instalada)
-genai.configure(api_key="AIzaSyCxecEPsKKoLi775K9StShWVCanwMPweQY")
+# 1. Configuración de la IA (Lectura segura desde Variables de Entorno)
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
 model = genai.GenerativeModel(model_name='gemini-2.5-flash')
 
 app = FastAPI(title="DocuMind RAG Engine")
