@@ -1,12 +1,13 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.responses import HTMLResponse
 import uvicorn
 import fitz  # PyMuPDF
-from google import genai 
+import google.generativeai as genai
 import time
 
-# Configuración de la IA
-client = genai.Client(api_key="AIzaSyCxecEPsKKoLi775K9StShWVCanwMPweQY")
+# 1. Configuración de la IA (Usando la librería correcta instalada)
+genai.configure(api_key="AIzaSyCxecEPsKKoLi775K9StShWVCanwMPweQY")
+model = genai.GenerativeModel(model_name='gemini-1.5-flash')
 
 app = FastAPI(title="DocuMind RAG Engine")
 
