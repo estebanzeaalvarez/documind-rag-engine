@@ -8,13 +8,17 @@ import os
 # 1. Inicializar la aplicación FastAPI
 app = FastAPI()
 
-# 2. Configuración de la IA
-API_KEY = os.environ.get("GOOGLE_API_KEY", "AIzaSyCxecEPsKKoLi775K9StShWVCanwMPweQY")
+# Configuración de la IA
 
-# Forzamos el transporte a 'rest' y la versión a 'v1' para evitar el error 404 de la v1beta
-genai.configure(api_key=API_KEY, transport='rest')
+client = genai.Client(api_key="AIzaSyCxecEPsKKoLi775K9StShWVCanwMPweQY")
 
-# Instanciamos el modelo asegurándonos de que use la ruta de producción
+
+
+app = FastAPI(title="DocuMind RAG Engine")
+
+# Configuración corregida para usar la versión estable y el nombre de modelo correcto
+genai.configure(api_key="AIzaSyCxecEPsKKoLi775K9StShWVCanwMPweQY")
+
 model = genai.GenerativeModel(
     model_name='gemini-1.5-flash',
 )
